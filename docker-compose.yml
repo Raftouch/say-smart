@@ -1,0 +1,12 @@
+services:
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: python-server
+    ports:
+      - "1252:8000"
+    volumes:
+      - ./server:/usr/src/app
+    restart: unless-stopped
