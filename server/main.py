@@ -1,14 +1,28 @@
 from fastapi import FastAPI, Query, BackgroundTasks
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from transformers import pipeline
 from datasets import load_dataset
+# from dotenv import load_dotenv
 import soundfile as sf
 import torch
 import os
 import uuid
 
+# load_dotenv()
+
 
 app = FastAPI()
+
+origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
