@@ -5,3 +5,4 @@ datasets
 soundfile 
 torch 
 sentencepiece
+python-dotenv

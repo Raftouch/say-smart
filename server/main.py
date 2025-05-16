@@ -3,13 +3,13 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from transformers import pipeline
 from datasets import load_dataset
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import soundfile as sf
 import torch
 import os
 import uuid
 
-# load_dotenv()
+load_dotenv()
 
 
 app = FastAPI()
