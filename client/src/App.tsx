@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "./api";
 
 function App() {
   const [text, setText] = useState("");
@@ -10,13 +11,13 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        `http://localhost:1252/saysmart?text=${encodeURIComponent(text)}`
-      );
-      if (!res.ok) throw new Error("Failed to fetch");
-
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
+      const res = await api.get(`/saysmart?text=${encodeURIComponent(text)}`, {
+        responseType: "blob",
+      });
+      // if (!res.ok) throw new Error("Failed to fetch");
+      // const blob = await res.blob();
+      // const url = window.URL.createObjectURL(blob);
+      const url = window.URL.createObjectURL(res.data);
 
       const a = document.createElement("a");
       a.href = url;
