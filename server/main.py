@@ -33,7 +33,7 @@ app.add_middleware(
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # lighter model for production
-synthesiser = pipeline("text-to-speech", "facebook/mms-1b-all-languages", torch_dtype=torch.float16, device=device)
+synthesiser = pipeline("text-to-speech", "facebook/fastspeech2-ljspeech", torch_dtype=torch.float16, device=device)
 
 # synthesiser = pipeline("text-to-speech", "microsoft/speecht5_tts", device=device)
 embeddings_dataset = load_dataset("Matthijs/cmu-arctic-xvectors", split="validation")
