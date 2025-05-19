@@ -32,7 +32,10 @@ app.add_middleware(
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-synthesiser = pipeline("text-to-speech", "microsoft/speecht5_tts", device=device)
+# lighter model for production
+synthesiser = pipeline("text-to-speech", "espnet/kan-bayashi_ljspeech_vits", device=device)
+
+# synthesiser = pipeline("text-to-speech", "microsoft/speecht5_tts", device=device)
 embeddings_dataset = load_dataset("Matthijs/cmu-arctic-xvectors", split="validation")
 speaker_embedding = torch.tensor(embeddings_dataset[7306]["xvector"]).unsqueeze(0)
 
