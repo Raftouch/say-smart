@@ -14,7 +14,13 @@ load_dotenv()
 
 app = FastAPI()
 
-origins = ["http://localhost:5173"]
+environment = os.getenv("ENVIRONMENT", "development")
+
+if environment == "production":
+    origins = [os.getenv("CORS_ORIGIN", "https://crypto-overview-today.netlify.app")]
+else:
+    origins = [os.getenv("CORS_ORIGIN", "http://localhost:5173")]
+
 
 app.add_middleware(
     CORSMiddleware,
